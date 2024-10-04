@@ -7,7 +7,7 @@ const WaterScarcityMap = () => {
 
   return (
     <Layout>
-      <div>updating soon</div>
+      <div>updating soon (this feature also needs a rental server to run and calculate so its not updated here now but in final round it will work 100% fine)</div>
     </Layout>
   );
 };
