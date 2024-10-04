@@ -33,7 +33,8 @@ export default function Chatbot() {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, an error occurred while processing your request.",
+          text: "Sorry, an error occurred while processing your request.(our backend is not currently deployed becuit needs rental servers but in final product our chabot will run 100% optimized and focused to water conservation topics
+            ",
           isUser: false,
         },
       ]);
