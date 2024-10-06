@@ -14,27 +14,22 @@ export default function Chatbot() {
     e.preventDefault();
     if (input.trim() === "") return;
 
-    // Add the user's input to the message list
     setMessages((prev) => [...prev, { text: input, isUser: true }]);
     setInput("");
     setIsLoading(true);
 
     try {
-      // Make a request to your FastAPI backend
       const response = await fetch(
         `http://localhost:8000/chatbot?message=${encodeURIComponent(input)}`
       );
-      const data = await response.json(); // Parse the JSON response
-
-      // Add the chatbot's response to the message list
+      const data = await response.json();
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
     } catch (error) {
       console.error("Error fetching chatbot response:", error);
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, an error occurred while processing your request.(our backend is not currently deployed becuit needs rental servers but in final product our chabot will run 100% optimized and focused to water conservation topics
-            ",
+          text: "Sorry, an error occurred while processing your request.(our backend is not currently deployed becuit needs rental servers but in final product our chabot will run 100% optimized and focused to water conservation topics",
           isUser: false,
         },
       ]);
@@ -46,11 +41,15 @@ export default function Chatbot() {
   return (
     <Layout chatbot={false}>
       <div className="flex flex-col pt-10 items-center min-h-screen bg-gray-50 mx-4">
+        <span className="text-lg font-semibold mb-2">
+          This might not work currently as there is no final backend made but in
+          the actual model it will work perfectly.
+        </span>
         <div className="flex flex-row mb-8 px-4 py-2 bg-black text-white rounded-2xl space-x-2">
           <BotIcon size={40} color="white" className="hidden md:block" />
           <BotIcon size={35} color="white" className="block md:hidden" />
           <h1 className="text-3xl md:text-4xl font-bold ">
-            Jal Saathi Chatbot
+            Jal Saathi Chatbot{" "}
           </h1>
         </div>
         <div className="w-full max-w-2xl bg-black rounded-lg shadow-lg p-6">

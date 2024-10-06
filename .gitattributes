@@ -1,2 +1,31 @@
+# Dependency directories
+node_modules/
+.next/
+
+# Build output
+out/
+dist/
+
+# Local environment variables
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
 # Auto detect text files and perform LF normalization
 * text=auto

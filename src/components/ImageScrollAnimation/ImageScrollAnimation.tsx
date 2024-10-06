@@ -5,7 +5,6 @@ import { ArrowDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import NextImage from "next/image";
 
-// Declare the custom element
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -32,6 +31,7 @@ const ImageCanvasAnimation: React.FC<ImageCanvasAnimationProps> = ({ scrollHeigh
   const [splineVisible, setSplineVisible] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingComplete, setLoadingComplete] = useState(false);
+  const [navigating, setNavigating] = useState(false); // New state for navigation loader
 
   const preloadImages = () => {
     const loadedImages: HTMLImageElement[] = [];
@@ -132,6 +132,23 @@ const ImageCanvasAnimation: React.FC<ImageCanvasAnimationProps> = ({ scrollHeigh
     return () => cancelAnimationFrame(requestId);
   }, [frameIndex, images]);
 
+  // Navigation Loader Component
+  const NavigationLoader = () => (
+    <div
+      id="navigation-loader"
+      className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 z-50"
+    >
+      <NextImage
+        src="/loader.gif"
+        alt="Navigating..."
+        width={100}
+        height={100}
+        className="contrast-150 saturate-125"
+      />
+      <h1 className="text-xl text-white mt-4">Navigating to home...</h1>
+    </div>
+  );
+
   return (
     <div style={{ height: scrollHeight }}>
       {!loadingComplete && (
@@ -197,11 +214,19 @@ const ImageCanvasAnimation: React.FC<ImageCanvasAnimationProps> = ({ scrollHeigh
           zIndex: 1,
         }}
       />
+      {navigating && <NavigationLoader />}
       <Link
         href="/home"
         className="bg-slate-800 text-white text-xl py-2 px-4 rounded-full z-50 fixed bottom-12 left-16 hover:bg-black"
+        onClick={(e) => {
+          e.preventDefault();
+          setNavigating(true);
+          setTimeout(() => {
+            window.location.href = "/home";
+          }, 1000);
+        }}
       >
-        Skip Intro
+        Go to Home
       </Link>
     </div>
   );
